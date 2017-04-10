@@ -12,7 +12,7 @@ class GroupsController < ApplicationController
 
     def edit
       @group = Group.find(params[:id])
-      @posts = Group.find(params[:id])
+      @post = Post.find(params[:id])
     end
 
     def new
