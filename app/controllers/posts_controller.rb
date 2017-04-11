@@ -2,25 +2,25 @@ class PostsController < ApplicationController
   before_action :authenticate_user! , only: [:new, :create, :edit, :update, :destroy]
 
   def index
-    @ posts = current_user.posts
+    @posts = current_user.posts
   end
 
   def new
-    @ group = Group.find(params[:group_id])
-    @ post = Post.new
+    @group = Group.find(params[:group_id])
+    @post = Post.new
   end
 
   def edit
-    @ group = Group.find(params[:id])
-    @ post = Post.find(params[:id])
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:group_id])
 
   end
 
   def update
-    @ group = Group.find(params[:id])
-    @ post = Post.find(params[:id])
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:group_id])
 
-    if @ post.update(post_params)
+    if @post.update(post_params)
        redirect_to account_posts_path, notice: "Update Success"
     else
        render :edit
@@ -28,10 +28,10 @@ class PostsController < ApplicationController
   end
 
   def create
-    @ group = Group.find(params[:group_id])
-    @ post = Post.new(post_params)
+    @group = Group.find(params[:group_id])
+    @post = Post.new(post_params)
 
-    if @ post.save
+    if @post.save
       redirect_to account_posts_path(@ post)
     else
       render :new
@@ -39,9 +39,9 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @ group = Group.find(params[:id])
-    @ post = Post.find(params[:id])
-    @ post.destroy
+    @group = Group.find(params[:group_id])
+    @post = Post.find(params[:group_id])
+    @post.destroy
     flash[:alert] = "Post deleted"
     redirect_to account_posts_path
   end
